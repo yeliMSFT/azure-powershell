@@ -23,7 +23,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.5.0" />
+    <PackageReference Include="Azure.Identity.BrokeredAuthentication" Version="1.0.0-beta.1" />
+    <PackageReference Include="Azure.Identity" Version="1.6.0-beta.1" />
   </ItemGroup>
 
   <ItemGroup>

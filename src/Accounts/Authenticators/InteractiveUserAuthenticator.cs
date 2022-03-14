@@ -21,6 +21,9 @@ using System.Threading.Tasks;
 
 using Azure.Core;
 using Azure.Identity;
+#if true
+using Azure.Identity.BrokeredAuthentication;
+#endif
 
 using Hyak.Common;
 
@@ -57,6 +60,16 @@ namespace Microsoft.Azure.PowerShell.Authenticators
             var requestContext = new TokenRequestContext(scopes);
             var authority = interactiveParameters.Environment.ActiveDirectoryAuthority;
 
+#if true
+            var options = new InteractiveBrowserCredentialBrokerOptions()
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                TokenCachePersistenceOptions = tokenCacheProvider.GetTokenCachePersistenceOptions(),
+                AuthorityHost = new Uri(authority),
+                RedirectUri = GetReplyUrlForWAM(clientId),
+            };
+#else
             var options = new InteractiveBrowserCredentialOptions()
             {
                 ClientId = clientId,
@@ -66,6 +79,7 @@ namespace Microsoft.Azure.PowerShell.Authenticators
                 RedirectUri = GetReplyUrl(onPremise, interactiveParameters),
                 LoginHint = interactiveParameters.UserId,
             };
+#endif
             var browserCredential = new InteractiveBrowserCredential(options);
 
             TracingAdapter.Information($"{DateTime.Now:T} - [InteractiveUserAuthenticator] Calling InteractiveBrowserCredential.AuthenticateAsync with TenantId:'{options.TenantId}', Scopes:'{string.Join(",", scopes)}', AuthorityHost:'{options.AuthorityHost}', RedirectUri:'{options.RedirectUri}'");
@@ -78,12 +92,18 @@ namespace Microsoft.Azure.PowerShell.Authenticators
                 cancellationToken);
         }
 
+#if true
+        private Uri GetReplyUrlForWAM(string clientId)
+        {
+            return new Uri($"ms-appx-web://microsoft.aad.brokerplugin/{clientId}");
+        }
+#else
         private Uri GetReplyUrl(bool onPremise, InteractiveParameters interactiveParameters)
         {
             var port = GetReplyUrlPort(onPremise, interactiveParameters);
             return new Uri($"http://localhost:{port}");
         }
-
+#endif
         private int GetReplyUrlPort(bool onPremise, InteractiveParameters interactiveParameters)
         {
             int portStart = onPremise ? AdfsPortStart : AadPortStart;
