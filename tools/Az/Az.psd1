@@ -213,7 +213,7 @@ Az.HDInsight
 This release migrates Microsoft.Azure.Graph SDK to MicrosoftGraph SDK.
 
 Az.KeyVault
-* Fixed a bug to continue visting ''NextPageLink'' when listing key vaults from ARM API
+* Fixed a bug to continue visiting ''NextPageLink'' when listing key vaults from ARM API
 
 Az.Network
 * Added support for retrieving the state of packet capture even when the provisioning state of the packet capture was failure
