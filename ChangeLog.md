@@ -146,6 +146,20 @@ This release migrates Microsoft.Azure.Graph SDK to MicrosoftGraph SDK.
     - Stop-AzWebAppContinuousWebJob
     - Stop-AzWebAppSlotContinuousWebJob
 
+### Thanks to our community contributors
+* Axel B. Andersen (@Agazoth)
+  * Update Get-AzADUser.md (#17549)
+  * Added a new example (#17535)
+* @azure-powershell-bot, Move Websites to main
+* @davidslamb, Fix invalid SAS token from New-AzServiceBusAuthorizationRuleSASToken (#17349)
+* Makoto Oda (@ecormaksin), OUTPUTS seems to be String not PSPipeline (#17287)
+* elle (@elle24), Update Get-AzApplicationGatewayRequestRoutingRule.md (#17405)
+* @enevoj, Update Get-AzDataCollectionRule.md (#17586)
+* Felipe Guth de Freitas Bergstrom (@guthbergstrom), Update New-AzDatabricksWorkspace.md (#17472)
+* @k0rtina, Update Set-AzConsumptionBudget.md (#17355)
+* Kanika Gupta (@kangupt), Added example for New-AzVM
+* Evgeniy Chuvikov (@snofe), Update Update-AzCosmosDBSqlDatabaseThroughput.md
+
 ## 7.3.2 - March 2022
 #### Az.Accounts
 * Changed target framework of AuthenticationAssemblyLoadContext to netcoreapp2.1 [#17428]
